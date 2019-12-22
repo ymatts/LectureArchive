@@ -21,5 +21,5 @@ dotplot2 = function(x,ntop=10,padj=0.05,type="up",font.size=5){
     theme_bw(base_size = font.size) +
     scale_colour_gradient(limits=c(0, padj), low="red") +
     ylab(NULL) +
-    ggtitle("GO pathway enrichment")
+    ggtitle(paste(type,"regulated","GO pathway enrichment"))
 }
