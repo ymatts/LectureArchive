@@ -1,6 +1,6 @@
-dotplot2 = function(x,ntop=10,type="up",font.size=5){
+dotplot2 = function(x,ntop=10,padj=0.05,type="up",font.size=5){
   dot_df = x
-  dot_df = dot_df[dot_df$p.adjust <= 0.05,]
+  dot_df = dot_df[dot_df$p.adjust <= padj,]
   dot_df = dot_df[order(dot_df$p.adjust),]
   dot_df$type = "upregulated"
   dot_df$type[dot_df$NES < 0] = "downregulated"
@@ -19,7 +19,7 @@ dotplot2 = function(x,ntop=10,type="up",font.size=5){
   ggplot(df[1:ntop,], aes(x = GeneRatio, y = fct_reorder(Description, GeneRatio))) + 
     geom_point(aes(size = GeneRatio, color = p.adjust)) +
     theme_bw(base_size = font.size) +
-    scale_colour_gradient(limits=c(0, 0.05), low="red") +
+    scale_colour_gradient(limits=c(0, padj), low="red") +
     ylab(NULL) +
     ggtitle("GO pathway enrichment")
 }
